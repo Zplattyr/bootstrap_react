@@ -1,0 +1,211 @@
+
+.active {
+  opacity: 0.17;
+}
+
+.container {
+  width: 54vw;
+  margin: 0px auto;
+  margin-top: 4vh;
+  position: relative;
+  text-align: center;
+}
+
+.btn-md {margin-right: 5px}
+
+.checkpoint {
+  max-height: 15vh;
+  background-color: #303030;
+  width: 23vw;
+  border: 0;
+  display: block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 0.3s;
+  cursor: pointer;
+  margin-top: 2vh;
+  box-shadow: 5px 5px 5px black;
+  border-radius: 1vw;
+  word-wrap: break-word;
+  padding: 10px;
+}
+
+.checkpoint .bomb {
+  height: 50px;
+  width: 50px;
+  background-color: #000000;
+  position: absolute;
+  bottom: -20px;
+  right: -40px;
+  opacity: 0.3;
+  background: url('files/bomb.png') center no-repeat;
+  background-size: 45px;
+}
+
+.checkpoint h3 {
+  font-size: 1.8vw;
+}
+
+.avatar-img{cursor: pointer !important;border-radius: 500px;width: 45px;
+height: 45px;}
+.avatar{position: absolute; right:30px}
+
+.reload {
+  width: 50px;
+  height: 50px;
+  background-color: brown !important;
+  position: absolute;
+  box-shadow: 2px 2px 2px black;
+  border: none;
+  border-radius: 500px;
+  transition: 0.3s;
+  right: 0;
+  cursor: pointer;
+  outline: none;
+  background: url('files/reload.png') center no-repeat;
+  background-size: 45px;
+  transform: translateX(50px);
+  top: 5px;
+}
+
+.add {
+  width: 50px;
+  height: 50px;
+  background-image: url('files/reload.png');
+  background-color: brown !important;
+  position: absolute;
+  border: none;
+  cursor: pointer;
+  border-radius: 500px;
+  transition: 0.3s;
+  right: -50px;
+  outline: none;
+  background: url('files/plus.png') center no-repeat;
+  background-size: 43px;
+  top: 100px;
+}
+
+.container .input {
+  background-color: rgb(107, 29, 29);
+  width: 50px;
+  height: 50px;
+  border-radius: 500px;
+  position: absolute;
+  top: 100px;
+  right: -55px;
+  transform: scale(0.1, 0.5);
+  transition: 0.5 !important;
+  box-shadow: 2px 2px 2px black;
+}
+
+.container input {
+  height: 25px;
+  width: 10px;
+  outline: none;
+  position: absolute;
+  top: 12px;
+  transition: 0.5;
+  right: 15px;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 500px;
+  border: 0;
+}
+
+.menu_parts:hover:not(.active) {
+  opacity: 0.3;
+}
+.checkpoint:hover {
+  background-color: #252525 !important;
+}
+.checkpoint:active {
+  background-color: #181818 !important;
+}
+
+.bomb:hover {
+  opacity: 1;
+}
+
+.menu_parts:active:not(.active) {
+  opacity: 0.1;
+}
+
+.reload:hover {
+  opacity: 0.8 !important;
+}
+
+.add:hover {
+  background-color: rgb(134, 31, 31) !important;
+}
+
+.reload:active {
+  background-color: rgb(94, 22, 22) !important;
+  transition: 1s;
+  animation-name: rotate;
+  animation-duration: 0.2s;
+}
+
+.add:active {
+  background-color: rgb(94, 22, 22) !important;
+  transition: 1 !important;
+}
+
+.divouting {
+  width: 200px !important;
+  top: 100px !important;
+  right: -200px !important;
+  width: 50px;
+  height: 50px;
+  animation-name: divouting;
+  animation-duration: 0.5s;
+  transform: scale(1, 1) !important;
+}
+
+.inputouting {
+  width: 130px !important;
+  box-shadow: none !important;
+  animation-name: inputouting;
+  animation-duration: 0.5s;
+}
+
+.disable {
+  pointer-events: none;
+}
+
+.hide {
+  display: none;
+}
+
+@keyframes divouting {
+  0% {
+    transform: scale(0.1, 0.5);
+    transform-origin: 0% 50%;
+  }
+  50% {
+    transform: scale(1, 0.9);
+    transform-origin: 0% 50%;
+  }
+  100% {
+    transform: scale(1, 1);
+    transform-origin: 0% 50%;
+  }
+}
+
+@keyframes inputouting {
+  0% {
+    transform: scaleX(0.1);
+    transform-origin: 0% 0%;
+  }
+  100% {
+    transform: scale(1);
+    transform-origin: 0% 0%;
+  }
+}
+@keyframes rotate {
+  0% {
+    transform: translate(100%, 5%) rotate(0deg);
+  }
+  100% {
+    transform: translate(100%, 5%) rotate(360deg);
+  }
+}

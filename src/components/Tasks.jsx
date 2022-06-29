@@ -1,31 +1,33 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const renderAddModal = (inputRefName,inputRefContent,add) => (
-  <div class="modal fade" id="add_card" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Добавить задачу</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+const renderAddModal = (inputRefName,inputRefContent,add,search) => (
+  <div className="modal fade" id="add_card" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div className="modal-dialog modal-dialog-centered">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title" id="staticBackdropLabel">Добавить задачу</h5>
+          <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <div class="modal-body">
+        <div className="modal-body">
 
-          <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">Примечание</span>
-          <input type="text" ref={inputRefName} class="form-control" aria-describedby="basic-addon1"/>
+          <div className="input-group mb-3">
+          <span className="input-group-text" id="basic-addon1">Примечание</span>
+          <input type="text" ref={inputRefName} className="form-control"
+          aria-describedby="basic-addon1" placeholder="Можно оставить пустым"/>
           </div>
 
-          <div class="input-group">
-          <span class="input-group-text">Описание</span>
-          <textarea class="form-control" ref={inputRefContent} aria-label="With textarea"></textarea>
+          <div className="input-group">
+          <span className="input-group-text inputb">Описание</span>
+          <textarea className="form-control" ref={inputRefContent}
+          aria-label="With textarea" placeholder="Содержание"></textarea>
           </div>
 
         </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={add}>Добавить</button>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={add} onKeyDown={search}>Добавить</button>
         </div>
       </div>
     </div>
@@ -62,15 +64,19 @@ function Tasks({ firestore, user }) {
   const add = () => {
     if (inputRefContent.current.value) {
       if (inputRefContent.current.value.length <= 77) {
-
+        console.log(toDoListOriginal.length.toString + 1)
         var item = {name: inputRefName.current.value,content: inputRefContent.current.value}
+        if (!inputRefName.current.value){
+          var num = toDoListOriginal.length + 1
+          item['name'] = 'Задача #' + num.toString()
+        }
         toDoListOriginal.push(item);
         console.log(toDoListOriginal)
         firestore.collection('users').doc(user.uid).set({ tasks: toDoListOriginal });
         toDoListDuplicate.push(item);
         inputRefContent.current.value = '';
         inputRefName.current.value = '';
-        setstate('Добавление')
+        setstate(Math.random())
       } else {
         alert('Не больше 77 символов!');
       }
@@ -96,7 +102,7 @@ function Tasks({ firestore, user }) {
   return (
     <div>
 
-      {renderAddModal(inputRefName,inputRefContent,add)}
+      {renderAddModal(inputRefName,inputRefContent,add,search)}
 
     <div className="container">
 
@@ -105,13 +111,13 @@ function Tasks({ firestore, user }) {
       data-bs-toggle="modal" data-bs-target="#add_card"></button>
 
       {toDoListDuplicate.map((item, index) => (
-        <div class="card text-bg-dark mb-3 col-lg-9" style={styles}key={`${item}_${index}`}
+        <div className="card text-bg-dark mb-3 col-lg-9" style={styles}key={`${item}_${index}`}
           onClick={() => deleteFromDuplicateList(item)}>
-          <button type="button" class="btn-close btn-for-card" onClick={() => deleteFromOriginalList(item)} aria-label="Close"></button>
-      <div class="card-header">{item.name}
+          <button type="button" className="btn-close btn-for-card" onClick={() => deleteFromOriginalList(item)} aria-label="Close"></button>
+      <div className="card-header">{item.name}
       </div>
-      <div class="card-body">
-        <h3 class="card-title">{item.content}</h3>
+      <div className="card-body">
+        <h3 className="card-title">{item.content}</h3>
       </div>
     </div>
       ))}

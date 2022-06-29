@@ -1,7 +1,7 @@
 import React from 'react';
-import { Nav, Tasks, LoginLogic } from './components';
+import {Tasks, LoginLogic } from './components';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyBxlNnZzJ1-Q0Tls_ZrUzbwVhZmka6d0bU',

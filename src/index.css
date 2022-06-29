@@ -1,4 +1,4 @@
-body{background: url('files/background.jpg') no-repeat;background-size:100%;
+body{background: url('files/background.png') repeat-y;background-size:100%;
  }
 .active {
   opacity: 0.17;
@@ -11,6 +11,8 @@ body{background: url('files/background.jpg') no-repeat;background-size:100%;
   position: relative;
   text-align: center;
 }
+
+.inputb {padding-right: 22px;padding-left: 22px}
 
 .btn-md {margin-right: 5px}
 
@@ -37,18 +39,18 @@ height: 45px;}
 }
 
 .add {
-  width: 50px;
-  height: 50px;
+  width: 53px;
+  height: 53px;
   position: absolute;
   border: none;
   cursor: pointer;
   box-shadow: 2px 2px 2px black;
-  border-radius: 500px;
+  border-radius: 800px;
   transition: 0.3s;
-  right: -50px;
+  right: -51px;
   outline: none;
   background: url('files/plus2.png') center no-repeat;
-  background-size: 60px;
+  background-size: 65px;
   top: 100px;
 }
 
@@ -106,7 +108,7 @@ height: 45px;}
 .card:hover{opacity: 0.8 !important;cursor: pointer;}
 
 .add:hover {
-  background-color: rgb(134, 31, 31) !important;
+  opacity: 0.7;
 }
 
 .reload:active {
@@ -120,7 +122,7 @@ height: 45px;}
 transition: 1 !important;}
 
 .add:active {
-  background-color: rgb(94, 22, 22) !important;
+  opacity: 0.3;
   transition: 1 !important;
 }
 

@@ -12,14 +12,13 @@ function LoginLogic({ user, firestore, auth }) {
   };
 
   if (user) {
-    console.log(user)
     return (
       <div className="avatar">
         <img onClick={out} src={user.photoURL} alt={user.displayName}
         className="avatar-img"/>
       </div>
     );
-  } else {
+  } else {console.log('a')
     return (
       <div className='avatar'>
       <div>
@@ -27,7 +26,7 @@ function LoginLogic({ user, firestore, auth }) {
       Войти
       </button>
 </div>
-      <div className="modal fade" id="login" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div className="modal fade" id="login" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">

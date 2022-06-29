@@ -1,4 +1,4 @@
-body{background: url('files/123.jpg') no-repeat;background-size:100%;
+body{background: url('files/background.jpg') no-repeat;background-size:100%;
  }
 .active {
   opacity: 0.17;
@@ -13,40 +13,6 @@ body{background: url('files/123.jpg') no-repeat;background-size:100%;
 }
 
 .btn-md {margin-right: 5px}
-
-.checkpoint {
-  max-height: 15vh;
-  background-color: #303030;
-  width: 23vw;
-  border: 0;
-  display: block;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: 0.3s;
-  cursor: pointer;
-  margin-top: 2vh;
-  box-shadow: 5px 5px 5px black;
-  border-radius: 1vw;
-  word-wrap: break-word;
-  padding: 10px;
-}
-
-.checkpoint .bomb {
-  height: 50px;
-  width: 50px;
-  background-color: #000000;
-  position: absolute;
-  bottom: -20px;
-  right: -40px;
-  opacity: 0.3;
-  background: url('files/bomb.png') center no-repeat;
-  background-size: 45px;
-}
-
-.checkpoint h3 {
-  font-size: 1.8vw;
-}
 
 .avatar-img{cursor: pointer !important;border-radius: 500px;width: 45px;
 height: 45px;}
@@ -73,17 +39,16 @@ height: 45px;}
 .add {
   width: 50px;
   height: 50px;
-  background-image: url('files/reload.png');
-  background-color: brown !important;
   position: absolute;
   border: none;
   cursor: pointer;
+  box-shadow: 2px 2px 2px black;
   border-radius: 500px;
   transition: 0.3s;
   right: -50px;
   outline: none;
-  background: url('files/plus.png') center no-repeat;
-  background-size: 43px;
+  background: url('files/plus2.png') center no-repeat;
+  background-size: 60px;
   top: 100px;
 }
 

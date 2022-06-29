@@ -40,7 +40,6 @@ function Tasks({ firestore, user }) {
   const [state, setstate] = React.useState(0);
   const inputRefContent = React.useRef();
   const inputRefName = React.useRef();
-
   React.useEffect(() => {
     if (user) {
       var docRef = firestore.collection('users').doc(user.uid);

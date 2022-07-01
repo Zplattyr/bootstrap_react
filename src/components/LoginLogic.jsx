@@ -1,7 +1,15 @@
 import React from 'react';
 import firebase from 'firebase';
+import {useSelector} from 'react-redux';
 
-function LoginLogic({ user, firestore, auth }) {
+function LoginLogic() {
+  const {auth,user} = useSelector(({firebaseInfo}) => {
+    return {
+      auth: firebaseInfo.auth,
+      user: firebaseInfo.user
+    }
+  })
+
   const login = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     await auth.signInWithPopup(provider);
@@ -18,8 +26,9 @@ function LoginLogic({ user, firestore, auth }) {
         className="avatar-img"/>
       </div>
     );
-  } else {console.log('a')
+  } else {
     return (
+
       <div className='avatar'>
       <div>
       <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#login">
@@ -41,8 +50,13 @@ function LoginLogic({ user, firestore, auth }) {
             </div>
           </div>
         </div>
+
+
       </div>
+
+
       </div>
+
     );
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import {useSelector} from 'react-redux';
 
 const renderAddModal = (inputRefName,inputRefContent,add,search) => (
   <div className="modal fade" id="add_card" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -34,49 +35,61 @@ const renderAddModal = (inputRefName,inputRefContent,add,search) => (
   </div>
 )
 
-let toDoListOriginal = [];
-let toDoListDuplicate = [];
-let tasks = [];
 
-function Tasks({ firestore, user }) {
-  const [state, setstate] = React.useState(0);
+function Tasks() {
+  const {user,firestore} = useSelector(({firebaseInfo}) => {
+    return {
+      firestore: firebaseInfo.firestore,
+      user: firebaseInfo.user
+    }
+  })
+
+
+  const [toDoListDuplicate, settoDoListDuplicate] = React.useState([{
+    name:'Пусто...',
+    content: 'Вы не авторизованы. Войдите в свой аккаунтт'
+  }]);
   const inputRefContent = React.useRef();
   const inputRefName = React.useRef();
+  const toDoListOriginal = React.useRef();
+
   React.useEffect(() => {
     if (user) {
       var docRef = firestore.collection('users').doc(user.uid);
       docRef.get().then((doc) => {
         if (doc.exists) {
-          tasks = doc.data().tasks;
-          toDoListOriginal = tasks.map((x) => x);
-          toDoListDuplicate = toDoListOriginal.map((x) => x);
-          setstate(123);
+          var tasks = doc.data().tasks;
+          toDoListOriginal.current = tasks.map((x) => x);
+          settoDoListDuplicate(toDoListOriginal.current.map((x) => x));
         }
       });
+    }
+    else {
+      settoDoListDuplicate([{
+        name:'Пусто...',
+        content: 'Вы не авторизованы. Войдите в свой аккаунтт'
+      }]);
     }
   }, [user, firestore]);
 
   const reload = () => {
-    toDoListDuplicate = toDoListOriginal.map((x) => x);
-    setstate("reload");
+    settoDoListDuplicate(toDoListOriginal.current.map((x) => x));
   };
 
   const add = () => {
     if (inputRefContent.current.value) {
       if (inputRefContent.current.value.length <= 77) {
-        console.log(toDoListOriginal.length.toString + 1)
+        console.log(toDoListOriginal.current.length.toString + 1)
         var item = {name: inputRefName.current.value,content: inputRefContent.current.value}
         if (!inputRefName.current.value){
-          var num = toDoListOriginal.length + 1
+          var num = toDoListOriginal.current.length + 1
           item['name'] = 'Задача #' + num.toString()
         }
-        toDoListOriginal.push(item);
-        console.log(toDoListOriginal)
-        firestore.collection('users').doc(user.uid).set({ tasks: toDoListOriginal });
-        toDoListDuplicate.push(item);
+        toDoListOriginal.current.push(item);
+        firestore.collection('users').doc(user.uid).set({ tasks: toDoListOriginal.current });
         inputRefContent.current.value = '';
         inputRefName.current.value = '';
-        setstate(Math.random())
+        settoDoListDuplicate(toDoListOriginal.current.map((x) => x));
       } else {
         alert('Не больше 77 символов!');
       }
@@ -90,15 +103,17 @@ function Tasks({ firestore, user }) {
   };
 
   const deleteFromDuplicateList = (item) => {
-    toDoListDuplicate.splice(toDoListDuplicate.indexOf(item), 1);
-    setstate(`${Math.random()}_${item}`);
+    var tempData = toDoListDuplicate.map((x) => x)
+    tempData.splice(tempData.indexOf(item), 1);
+    settoDoListDuplicate(tempData.map((x) => x));
   };
 
   const deleteFromOriginalList = (item) => {
-    toDoListOriginal.splice(toDoListOriginal.indexOf(item), 1);
-    firestore.collection('users').doc(user.uid).set({ tasks: toDoListOriginal });
+    toDoListOriginal.current.splice(toDoListOriginal.current.indexOf(item), 1);
+    firestore.collection('users').doc(user.uid).set({ tasks: toDoListOriginal.current });
   };
   const styles = {maxwidth: "18rem",margin:"auto"};
+
   return (
     <div>
 

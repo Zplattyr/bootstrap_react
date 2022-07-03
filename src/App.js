@@ -1,4 +1,5 @@
 import {Tasks, LoginLogic} from './components';
+import './bootstrap/css/bootstrap.css'
 
 function App() {
   return (

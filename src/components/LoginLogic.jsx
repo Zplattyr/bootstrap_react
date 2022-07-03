@@ -1,14 +1,56 @@
 import React from 'react';
 import firebase from 'firebase';
 import {useSelector} from 'react-redux';
+import {Modal,Button} from 'react-bootstrap';
+
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Авторизация
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>
+          Для использования необходимо сначала авторизоваться в учетной записи Google
+        </p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onLogin}>Войти</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
 
 function LoginLogic() {
+  const [modalShow, setModalShow] = React.useState(false);
+  const firstEnter = React.useRef(1)
+
   const {auth,user} = useSelector(({firebaseInfo}) => {
     return {
       auth: firebaseInfo.auth,
       user: firebaseInfo.user
     }
   })
+
+  React.useEffect(()=>{
+
+    setTimeout(()=>{
+    if (!user  && firstEnter.current){
+      firstEnter.current = 0;
+      setModalShow(1)
+    }
+  },1000)
+
+  },[user])
+
 
   const login = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -19,6 +61,9 @@ function LoginLogic() {
     await auth.signOut();
   };
 
+  setTimeout(()=> {
+
+  },1000)
   if (user) {
     return (
       <div className="avatar">
@@ -27,32 +72,22 @@ function LoginLogic() {
       </div>
     );
   } else {
+
     return (
 
       <div className='avatar'>
-      <div>
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#login">
-      Войти
-      </button>
-</div>
-      <div className="modal fade" id="login" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">Авторизация</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              Для использования необходимо сначала авторизоваться в учетной записи Google
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-primary" onClick={login} data-bs-dismiss="modal">Войти</button>
-            </div>
-          </div>
+
+        <div>
+          <Button variant="primary" onClick={() => setModalShow(true)}>
+            Войти
+          </Button>
         </div>
 
-
-      </div>
+          <MyVerticallyCenteredModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          onLogin={() => login()}
+          />
 
 
       </div>

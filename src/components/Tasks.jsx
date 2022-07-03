@@ -47,11 +47,11 @@ function Tasks() {
 
   const [toDoListDuplicate, settoDoListDuplicate] = React.useState([{
     name:'Пусто...',
-    content: 'Вы не авторизованы. Войдите в свой аккаунтт'
+    content: 'Вы не авторизованы. Войдите в свой аккаунт'
   }]);
   const inputRefContent = React.useRef();
   const inputRefName = React.useRef();
-  const toDoListOriginal = React.useRef();
+  const toDoListOriginal = React.useRef([]);
 
   React.useEffect(() => {
     if (user) {
@@ -60,14 +60,24 @@ function Tasks() {
         if (doc.exists) {
           var tasks = doc.data().tasks;
           toDoListOriginal.current = tasks.map((x) => x);
-          settoDoListDuplicate(toDoListOriginal.current.map((x) => x));
+
+          if (toDoListOriginal.current.length){
+            settoDoListDuplicate(toDoListOriginal.current.map((x) => x));
+          }
+          else{
+            settoDoListDuplicate([{
+              name:'Нет задач?',
+              content: 'Добавьте первую задачу, нажав на плюс!'
+            }])
+          }
+          
         }
       });
     }
     else {
       settoDoListDuplicate([{
         name:'Пусто...',
-        content: 'Вы не авторизованы. Войдите в свой аккаунтт'
+        content: 'Вы не авторизованы. Войдите в свой аккаунт'
       }]);
     }
   }, [user, firestore]);
@@ -116,23 +126,21 @@ function Tasks() {
 
   return (
     <div>
-
       {renderAddModal(inputRefName,inputRefContent,add,search)}
 
     <div className="container">
 
-      <button className={classNames('reload', { disable: !user })} onClick={reload}></button>
-      <button className={classNames('add', { disable: !user })}
+      <button className={classNames('reload no-copy', { disable: !user })} onClick={reload}></button>
+      <button className={classNames('add no-copy', { disable: !user })}
       data-bs-toggle="modal" data-bs-target="#add_card"></button>
 
       {toDoListDuplicate.map((item, index) => (
-        <div className="card text-bg-dark mb-3 col-lg-9" style={styles}key={`${item}_${index}`}
+        <div id='card' className={classNames('card text-bg-dark mb-3 col-lg-9',{ disable: (!user || !toDoListOriginal.current.length)})} style={styles} key={`${item}_${index}`}
           onClick={() => deleteFromDuplicateList(item)}>
           <button type="button" className="btn-close btn-for-card" onClick={() => deleteFromOriginalList(item)} aria-label="Close"></button>
-      <div className="card-header">{item.name}
-      </div>
+      <div className="no-copy card-header"><em>{item.name}</em></div>
       <div className="card-body">
-        <h3 className="card-title">{item.content}</h3>
+        <h3 className="no-copy card-title">{item.content}</h3>
       </div>
     </div>
       ))}

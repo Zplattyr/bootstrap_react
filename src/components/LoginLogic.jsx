@@ -11,7 +11,7 @@ function MyVerticallyCenteredModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Авторизация
         </Modal.Title>
@@ -87,6 +87,7 @@ function LoginLogic() {
           show={modalShow}
           onHide={() => setModalShow(false)}
           onLogin={() => login()}
+          backdrop="static"
           />
 
 

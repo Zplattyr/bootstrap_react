@@ -1,5 +1,8 @@
 body{background: url('files/background.png') repeat-y;background-size:100%;
  }
+
+
+
 .active {
   opacity: 0.17;
 }
@@ -11,6 +14,7 @@ body{background: url('files/background.png') repeat-y;background-size:100%;
   position: relative;
   text-align: center;
 }
+
 
 .inputb {padding-right: 22px;padding-left: 22px}
 
@@ -150,4 +154,18 @@ transition: 1 !important;}
 -ms-user-select: none;
 -o-user-select: none;
 user-select: none;
+}
+
+.fixed-bottom{
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+.help{
+  width: 53px;
+  height: 53px;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 800px;
+  transition: 0.3s;
+  background: url('files/question.png') no-repeat;
+  background-size: 53px;
 }

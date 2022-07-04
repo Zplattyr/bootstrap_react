@@ -1,9 +1,9 @@
-import {Tasks, LoginLogic} from './components';
+import {Tasks, LoginLogic,Help} from './components';
 import './bootstrap/css/bootstrap.css'
 
 function App() {
   return (
-    <div>
+    <>
     <nav className="navbar bg-dark">
     <LoginLogic/>
   <form className="container-fluid justify-content-center">
@@ -13,7 +13,8 @@ function App() {
   </form>
     </nav>
       <Tasks/>
-    </div>
+      <Help />
+    </>
 
   );
 }

@@ -64,19 +64,19 @@ function Tasks() {
           if (toDoListOriginal.current.length){
             settoDoListDuplicate(toDoListOriginal.current.map((x) => x));
           }
-          else{
+          
+          
+        } else{
             settoDoListDuplicate([{
               name:'Нет задач?',
               content: 'Добавьте первую задачу, нажав на плюс!'
             }])
           }
-          
-        }
       });
     }
     else {
       settoDoListDuplicate([{
-        name:'Пусто.',
+        name:'Пусто...',
         content: 'Вы не авторизованы. Войдите в свой аккаунт'
       }]);
     }

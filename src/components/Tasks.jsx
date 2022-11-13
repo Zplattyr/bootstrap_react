@@ -76,7 +76,7 @@ function Tasks() {
     }
     else {
       settoDoListDuplicate([{
-        name:'Пусто...',
+        name:'Пусто.',
         content: 'Вы не авторизованы. Войдите в свой аккаунт'
       }]);
     }

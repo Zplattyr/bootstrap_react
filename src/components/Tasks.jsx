@@ -63,6 +63,11 @@ function Tasks() {
 
           if (toDoListOriginal.current.length){
             settoDoListDuplicate(toDoListOriginal.current.map((x) => x));
+          } else{
+            settoDoListDuplicate([{
+              name:'Нет задач?',
+              content: 'Добавьте первую задачу, нажав на плюс!'
+            }])
           }
           
           

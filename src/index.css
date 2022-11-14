@@ -154,6 +154,7 @@ transition: 1 !important;}
 -ms-user-select: none;
 -o-user-select: none;
 user-select: none;
+ -webkit-appearance:none;
 }
 
 .fixed-bottom{
